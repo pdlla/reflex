@@ -284,7 +284,7 @@ attachPromptlyDynWithMaybe f d e =
 -- becomes 'Just', an inner 'Dynamic' will be provided, whose value will track
 -- the 'a' inside the 'Just'; when the constructor becomes 'Nothing', the
 -- existing inner 'Dynamic' will become constant, and will not change when the
--- outer constructor changes back to 'Nothing'.
+-- outer constructor changes back to 'Just'.
 maybeDyn :: forall t a m. (Reflex t, MonadFix m, MonadHold t m) => Dynamic t (Maybe a) -> m (Dynamic t (Maybe (Dynamic t a)))
 maybeDyn = fmap (fmap unpack) . eitherDyn . fmap pack
   where pack = \case
